@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "gema"
+version = "0.1.0"
+description = ""
+authors = ["long2ice <long2ice@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+xmltodict = "*"
+Jinja2 = "*"
+pydantic = "*"
+typer = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+coveralls = "*"
+pytest-cov = "*"
+mypy = "*"
+flake8 = "*"
+isort = "*"
+black = "*"
+pyproject-flake8 = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+aerich = "gema.cli:main"
+
+[tool.black]
+line-length = 100
+target-version = ['py36', 'py37', 'py38', 'py39']
+
+[tool.mypy]
+pretty = true
+ignore_missing_imports = true
+
+[tool.flake8]
+ignore = 'E501,W503,E203'
