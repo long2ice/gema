@@ -3,7 +3,7 @@ RUN mkdir -p /gema
 WORKDIR /gema
 COPY pyproject.toml poetry.lock /gema/
 ENV POETRY_VIRTUALENVS_CREATE false
-RUN pip3 install poetry && poetry install --no-root --no-dev
+RUN pip3 install poetry && poetry install
 
 FROM python:3.9-slim
 WORKDIR /gema
