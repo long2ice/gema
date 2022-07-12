@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "gema"
 version = "0.1.0"
-description = ""
+description = "Convert from json/xml to Pydantic/Go/Rust etc."
 authors = ["long2ice <long2ice@gmail.com>"]
 
 [tool.poetry.dependencies]
@@ -9,7 +9,9 @@ python = "^3.9"
 xmltodict = "*"
 Jinja2 = "*"
 pydantic = "*"
-typer = "*"
+fastapi = "*"
+asyncmy = "*"
+uvicorn = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"

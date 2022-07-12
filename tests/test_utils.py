@@ -1,7 +1,7 @@
 from gema.dest.go import Go
 from gema.dest.pydantic import Pydantic
 from gema.dest.rust import Rust
-from gema.enums import DestType, SourceType
+from gema.enums import DestType, Language, SourceType
 from gema.source.json import Json
 from gema.source.xml import Xml
 from gema.utils import camel_to_snake, get_dest_cls, get_source_cls
@@ -19,6 +19,6 @@ def test_get_source_cls():
 
 
 def test_get_dest_cls():
-    assert get_dest_cls(DestType.rust) is Rust
-    assert get_dest_cls(DestType.go) is Go
-    assert get_dest_cls(DestType.pydantic) is Pydantic
+    assert get_dest_cls(Language.rust, DestType.rust) is Rust
+    assert get_dest_cls(Language.go, DestType.go) is Go
+    assert get_dest_cls(Language.python, DestType.pydantic) is Pydantic

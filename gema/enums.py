@@ -10,3 +10,10 @@ class DestType(str, Enum):
     pydantic = "pydantic"
     go = "go"
     rust = "rust"
+    dataclass = "dataclass"
+
+
+class Language(str, Enum):
+    python = "python"
+    go = "go"
+    rust = "rust"
