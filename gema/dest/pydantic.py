@@ -9,7 +9,7 @@ from gema.utils import camel_to_snake
 class Pydantic(Dest):
     template_file = "pydantic.jinja2"
     type = DestType.pydantic
-    language = Language.go
+    language = Language.python
 
     def __init__(self, model: Model, optional: bool = False, snake_case: bool = False):
         super().__init__(model)
@@ -35,7 +35,7 @@ class Pydantic(Dest):
                     )
                 else:
                     type_ = f"List[{field.type[0].__name__}]"
-            elif field.type is Any:
+            elif field.type is type(Any):
                 imports.add("from typing import Any")
                 type_ = "Any"
             else:

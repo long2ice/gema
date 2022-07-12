@@ -34,13 +34,13 @@ def _discover_dest_type():
     return ret
 
 
-_source_cls_map = _discover_source_type()
-_dest_cls_map = _discover_dest_type()
+source_cls_map = _discover_source_type()
+dest_cls_map = _discover_dest_type()
 
 
 def get_source_cls(type_: SourceType):
-    return _source_cls_map[type_]
+    return source_cls_map[type_]
 
 
 def get_dest_cls(language: Language, type_: DestType):
-    return _dest_cls_map[language][type_]
+    return dest_cls_map[language][type_]

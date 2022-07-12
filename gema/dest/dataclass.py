@@ -26,7 +26,7 @@ class Dataclass(Dest):
                     )
                 else:
                     type_ = f"List[{field.type[0].__name__}]"
-            elif field.type is Any:
+            elif field.type is type(Any):
                 imports.add("from typing import Any")
                 type_ = "Any"
             else:

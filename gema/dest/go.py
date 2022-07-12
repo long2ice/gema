@@ -34,7 +34,7 @@ class Go(Dest):
                     models[name.title()] = self._parse_model(models, field.type[0])
                 else:
                     type_ = f"[]{self._type_convert(field.type[0])}"
-            elif field.type is Any:
+            elif field.type is type(Any):
                 type_ = "interface{}"
             else:
                 type_ = self._type_convert(field.type)

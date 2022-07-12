@@ -29,7 +29,7 @@ class Source(Base):
                 else:
                     field = Field(name=k, type=[type(v[0])])
             elif v is None:
-                field = Field(name=k, type=Any)
+                field = Field(name=k, type=type(Any))
             else:
                 field = Field(name=k, type=type(v))
             model.fields.append(field)
