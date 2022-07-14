@@ -1,25 +1,25 @@
-from typing import Any, Dict, Type
+from typing import Type, Dict, Any
 
 from gema.dest import Dest
 from gema.enums import DestType, Language
 from gema.schema import Model
 
 
-class Go(Dest):
-    template_file = "go.jinja2"
-    type = DestType.go
-    language = Language.go
+class Typescript(Dest):
+    template_file = "typescript.jinja2"
+    type = DestType.typescript
+    language = Language.typescript
 
     @classmethod
     def _type_convert(cls, type_: Type):
         if type_ is int:
-            return "int"
-        if type_ is str:
+            return "number"
+        if type_ is str or type_ is Any:
             return "string"
         if type_ is bool:
-            return "bool"
+            return "boolean"
         if type_ is float:
-            return "float"
+            return "number"
 
     def _parse_model(self, models: Dict[str, Any], model: Model):
         fields = []
@@ -30,16 +30,14 @@ class Go(Dest):
                 models[name.title()] = self._parse_model(models, field.type)
             elif isinstance(field.type, list):
                 if isinstance(field.type[0], Model):
-                    type_ = f"[]{name.title()}"
+                    type_ = f"Array<{name.title()}>"
                     models[name.title()] = self._parse_model(models, field.type[0])
                 else:
-                    type_ = f"[]{self._type_convert(field.type[0])}"
-            elif field.type is type(Any):
-                type_ = "interface{}"
+                    type_ = f"Array<{self._type_convert(field.type[0])}>"
             else:
                 type_ = self._type_convert(field.type)
 
-            field_str = f'{name.title()} {type_} `json:"{name}"`'
+            field_str = f"{name}: {type_};"
             fields.append(field_str)
         return fields
 

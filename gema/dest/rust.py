@@ -13,13 +13,13 @@ class Rust(Dest):
     @classmethod
     def _type_convert(cls, type_: Type):
         if type_ is int:
-            return "i8"
+            return "i64"
         if type_ is str or type_ is Any:
             return "String"
         if type_ is bool:
             return "bool"
         if type_ is float:
-            return "f8"
+            return "f64"
 
     def _parse_model(self, models: Dict[str, Any], model: Model):
         fields = []
@@ -44,5 +44,5 @@ class Rust(Dest):
     def render(self):
         model = self.model
         models = {}
-        models["GemaGenerated"] = self._parse_model(models, model)
+        models[self.model_name] = self._parse_model(models, model)
         return self.template.render(models=models)

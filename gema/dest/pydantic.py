@@ -55,5 +55,5 @@ class Pydantic(Dest):
         model = self.model
         imports = set()
         models = {}
-        models["GemaGenerated"] = self._parse_model(imports, models, model)
+        models[self.model_name] = self._parse_model(imports, models, model)
         return self.template.render(models=models, imports=sorted(imports))

@@ -12,6 +12,7 @@ pydantic = "*"
 fastapi = "*"
 asyncmy = "*"
 uvicorn = "*"
+PyYAML = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
