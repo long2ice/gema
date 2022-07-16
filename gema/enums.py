@@ -5,6 +5,7 @@ class SourceType(str, Enum):
     json = "json"
     xml = "xml"
     yaml = "yaml"
+    toml = "toml"
 
 
 class DestType(str, Enum):

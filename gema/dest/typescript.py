@@ -34,6 +34,8 @@ class Typescript(Dest):
                     models[name.title()] = self._parse_model(models, field.type[0])
                 else:
                     type_ = f"Array<{self._type_convert(field.type[0])}>"
+            elif field.type is type(Any):
+                type_ = "any"
             else:
                 type_ = self._type_convert(field.type)
 

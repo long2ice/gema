@@ -11,7 +11,10 @@ router = APIRouter()
 async def convert(req: ConvertReq):
     source_cls = get_source_cls(req.source_type)
     sb = source_cls(req.content)
-    decoded = sb.decode()
+    try:
+        decoded = sb.decode()
+    except Exception as e:
+        raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail=str(e))
     try:
         dest_cls = get_dest_cls(req.language, req.dest_type)
     except IndexError:
