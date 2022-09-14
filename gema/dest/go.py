@@ -1,5 +1,7 @@
 from typing import Any, Dict, Type
 
+import humps
+
 from gema.dest import Dest
 from gema.enums import DestType, Language
 from gema.schema import Model
@@ -25,13 +27,14 @@ class Go(Dest):
         fields = []
         for field in model.fields:
             name = field.name
+            pascalize_name = humps.pascalize(field.name)
             if isinstance(field.type, Model):
-                type_ = f"{name.title()}"
-                models[name.title()] = self._parse_model(models, field.type)
+                type_ = pascalize_name
+                models[pascalize_name] = self._parse_model(models, field.type)
             elif isinstance(field.type, list):
                 if isinstance(field.type[0], Model):
-                    type_ = f"[]{name.title()}"
-                    models[name.title()] = self._parse_model(models, field.type[0])
+                    type_ = f"[]{pascalize_name}"
+                    models[pascalize_name] = self._parse_model(models, field.type[0])
                 else:
                     type_ = f"[]{self._type_convert(field.type[0])}"
             elif field.type is type(Any):
@@ -39,7 +42,7 @@ class Go(Dest):
             else:
                 type_ = self._type_convert(field.type)
 
-            field_str = f'{name.title()} {type_} `json:"{name}"`'
+            field_str = f'{pascalize_name} {type_} `json:"{name}"`'
             fields.append(field_str)
         return fields
 
