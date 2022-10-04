@@ -10,9 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Build and Publish
-        uses: VaultVulp/gp-docker-action@1.1.8
+        uses: VaultVulp/gp-docker-action@1.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           image-name: gema
@@ -28,7 +28,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: |
-            cd /root/docker/gema/
-            docker compose pull
-            docker compose up -d
+          script: kubectl rollout restart deployment gema
