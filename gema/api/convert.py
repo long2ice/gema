@@ -19,5 +19,5 @@ async def convert(req: ConvertReq):
         dest_cls = get_dest_cls(req.language, req.dest_type)
     except IndexError:
         raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail="No such dest")
-    db = dest_cls(sb.get_model(decoded), **(req.config or {}))
+    db = dest_cls(sb.get_model(decoded), req.source_type, **(req.config or {}))
     return {"content": db.render()}

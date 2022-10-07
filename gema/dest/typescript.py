@@ -1,4 +1,4 @@
-from typing import Type, Dict, Any
+from typing import Any, Dict, Type
 
 from gema.dest import Dest
 from gema.enums import DestType, Language

@@ -42,7 +42,7 @@ class Go(Dest):
             else:
                 type_ = self._type_convert(field.type)
 
-            field_str = f'{pascalize_name} {type_} `json:"{name}"`'
+            field_str = f'{pascalize_name} {type_} `{self.source_type}:"{name}"`'
             fields.append(field_str)
         return fields
 
