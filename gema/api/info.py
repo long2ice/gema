@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from gema.utils import source_cls_map, dest_cls_map
+from gema.utils import dest_cls_map, source_cls_map
 
 router = APIRouter()
 
