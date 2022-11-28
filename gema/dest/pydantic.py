@@ -1,7 +1,7 @@
 from typing import Any, Dict
 
 from gema.dest import Dest
-from gema.enums import DestType, Language
+from gema.enums import DestType, Language, SourceType
 from gema.schema import Model
 from gema.utils import camel_to_snake
 
@@ -11,8 +11,14 @@ class Pydantic(Dest):
     type = DestType.pydantic
     language = Language.python
 
-    def __init__(self, model: Model, optional: bool = False, snake_case: bool = False):
-        super().__init__(model)
+    def __init__(
+        self,
+        model: Model,
+        source_type: SourceType,
+        optional: bool = False,
+        snake_case: bool = False,
+    ):
+        super().__init__(model, source_type)
         self.snake_case = snake_case
         self.optional = optional
 
@@ -30,7 +36,9 @@ class Pydantic(Dest):
                 imports.add("from typing import List")
                 if isinstance(field.type[0], Model):
                     type_ = f"List['{name.title()}']"
-                    models[name.title()] = self._parse_model(imports, models, field.type[0])
+                    models[name.title()] = self._parse_model(
+                        imports, models, field.type[0]
+                    )
                 else:
                     type_ = f"List[{field.type[0].__name__}]"
             elif field.type is type(Any):
