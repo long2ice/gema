@@ -36,9 +36,7 @@ class Pydantic(Dest):
                 imports.add("from typing import List")
                 if isinstance(field.type[0], Model):
                     type_ = f"List['{name.title()}']"
-                    models[name.title()] = self._parse_model(
-                        imports, models, field.type[0]
-                    )
+                    models[name.title()] = self._parse_model(imports, models, field.type[0])
                 else:
                     type_ = f"List[{field.type[0].__name__}]"
             elif field.type is type(Any):
